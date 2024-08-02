@@ -6,7 +6,7 @@ export default function Item({ data }) {
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-      <Gallery id={data.id} thumbnail={data.acf.hero_image.sizes.medium} fullImage={data.acf.hero_image.sizes.large} />
+      <Gallery key={data.id} thumbnail={data.acf.hero_image.sizes.medium} fullImage={data.acf.hero_image.sizes.large} />
 
 
       <div className="p-5">
