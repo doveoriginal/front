@@ -1,41 +1,16 @@
-"use client";
-
 // URL da API
 // https://stockcar-f61453.ingress-earth.ewp.live/wp-json/wp/v2/cars?acf_format=standard&_fields=id,acf.brand,acf.price,acf.hero_image.sizes.medium
 
 import { Alert } from "flowbite-react";
 import Item from "./components/item";
 
-const posts = [
-  {
-    id: 23,
-    acf: {
-      brand: "BMW",
-      price: "200000",
-      hero_image: {
-        sizes: {
-          medium:
-            "https://stockcar-f61453.ingress-earth.ewp.live/wp-content/uploads/2024/08/Captura-de-Tela-2024-07-19-as-23.44.49-300x245.png",
-        },
-      },
-    },
-  },
-  {
-    id: 22,
-    acf: {
-      brand: "FIAT",
-      price: "100000",
-      hero_image: {
-        sizes: {
-          medium:
-            "https://stockcar-f61453.ingress-earth.ewp.live/wp-content/uploads/2024/08/b-300x157.webp",
-        },
-      },
-    },
-  },
-];
+const Home = async () => {
+  const req = await fetch(
+    process.env.NEXT_PUBLIC_API_URL +
+      `/cars?acf_format=standard&_fields=id,acf.brand,acf.price,acf.hero_image.sizes.medium,acf.hero_image.sizes.large`
+  );
+  const cars = await req.json();
 
-export default function Home() {
   return (
     <div className="relative isolate px-6 pt-24 lg:px-8">
       <Alert color="info">
@@ -44,10 +19,45 @@ export default function Home() {
       </Alert>
 
       <div className="mx-auto mt-2 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-2 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-        {posts.map((post) => (
-          <Item data={post} id={post.id} />
+        {cars.map((car) => (
+          <Item data={car} key={car.id} />
         ))}
       </div>
+
+      
+
+<div id="gallery" className="relative w-full" data-carousel="slide">
+    <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" className="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="" />
+        </div>
+        <div className="hidden duration-700 ease-in-out" data-carousel-item="active">
+            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" className="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="" />
+        </div>
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" className="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="" />
+        </div>
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" className="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="" />
+        </div>
+        <div className="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" className="absolute block max-w-full h-auto -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="" />
+        </div>
+    </div>
+    <button type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+           
+            <span className="sr-only">Previous</span>
+        </span>
+    </button>
+    <button type="button" className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+        <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+            
+            <span className="sr-only">Next</span>
+        </span>
+    </button>
+</div>
+
 
       <div
         aria-hidden="true"
@@ -98,4 +108,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Home;
