@@ -8,7 +8,6 @@ export default function Item({ data }) {
 
       <Gallery key={data.id} thumbnail={data.acf.hero_image.sizes.medium} fullImage={data.acf.hero_image.sizes.large} />
 
-
       <div className="p-5">
         <a href="#">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -19,7 +18,6 @@ export default function Item({ data }) {
           Preço: {data.acf.price}
         </p>
       </div>
-
 
     </div>
   );
